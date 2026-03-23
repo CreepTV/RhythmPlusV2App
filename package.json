@@ -1,0 +1,36 @@
+{
+  "name": "Rhythm Plus V2",
+  "version": "1.0.0",
+  "description": "Rhythm Plus V2 Desktop App",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^34.0.0",
+    "electron-builder": "^25.0.0"
+  },
+  "build": {
+    "appId": "com.rhythmplus.v2",
+    "productName": "Rhythm Plus V2",
+    "icon": "data/rythmplus-icon.png",
+    "win": {
+      "target": "nsis",
+      "icon": "data/rythmplus-icon.png"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "data/rythmplus-icon.png"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "data/rythmplus-icon.png"
+    }
+  },
+  "dependencies": {
+    "discord-rpc": "^4.0.1"
+  }
+}
