@@ -326,66 +326,67 @@
             text-align: center;
         }
 
-        .preview-placeholder {
-            max-width: 900px;
+        .screenshots {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+            max-width: 950px;
             margin: 0 auto;
+        }
+
+        .screenshot-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .screenshot-frame {
+            width: 100%;
             border-radius: 16px;
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.08);
-            background: linear-gradient(145deg, rgba(168, 85, 247, 0.05), rgba(0, 180, 216, 0.05));
-            padding: 3rem 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
         }
 
-        .preview-placeholder .window-mock {
-            max-width: 700px;
-            margin: 0 auto;
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+        .screenshot-frame:hover {
+            border-color: rgba(168, 85, 247, 0.25);
+            box-shadow: 0 12px 50px rgba(168, 85, 247, 0.15);
+            transform: translateY(-4px);
         }
 
-        .window-titlebar {
-            background: linear-gradient(90deg, #1c1c1c, #121212);
-            padding: 0.6rem 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        .screenshot-frame img {
+            width: 100%;
+            display: block;
         }
 
-        .window-titlebar .dots {
-            display: flex;
-            gap: 6px;
-        }
-
-        .window-titlebar .dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-        }
-
-        .dot.red { background: #ff5f57; }
-        .dot.yellow { background: #fdbc40; }
-        .dot.green { background: #28c840; }
-
-        .window-titlebar .title {
-            font-size: 0.8rem;
+        .screenshot-label {
+            font-size: 0.9rem;
             color: var(--text-muted);
             font-weight: 500;
         }
 
-        .window-body {
-            padding: 3rem 2rem;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.95rem;
+        .screenshots-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 2rem;
+            align-items: center;
         }
 
-        .window-body .logo-preview {
-            height: 50px;
-            margin-bottom: 1rem;
-            opacity: 0.8;
+        .screenshot-frame.small {
+            width: auto;
+            max-width: 360px;
+        }
+
+        @media (max-width: 768px) {
+            .screenshots-row {
+                grid-template-columns: 1fr;
+            }
+            .screenshot-frame.small {
+                max-width: 100%;
+            }
         }
 
         /* ========== Credits Section ========== */
@@ -552,7 +553,7 @@
     <nav>
         <a href="#" class="nav-logo">
             <img src="data/rythmplus-icon.png" alt="Rhythm+">
-            <span>Rhythm+ V2</span>
+            <span>Rhythm+ V2 WebApp</span>
         </a>
         <ul class="nav-links">
             <li><a href="#features">Features</a></li>
@@ -652,20 +653,19 @@
         <h2 class="section-title">Desktop Experience</h2>
         <p class="section-desc">Das volle Rhythm+ Erlebnis &mdash; nativ auf deinem Desktop.</p>
 
-        <div class="preview-placeholder">
-            <div class="window-mock">
-                <div class="window-titlebar">
-                    <div class="dots">
-                        <span class="dot red"></span>
-                        <span class="dot yellow"></span>
-                        <span class="dot green"></span>
+        <div class="screenshots">
+            <div class="screenshots-row">
+                <div class="screenshot-item">
+                    <div class="screenshot-frame">
+                        <img src="data/rhythm-plus-v2-Appexample.png" alt="Rhythm Plus V2 Desktop App">
                     </div>
-                    <div class="title">Rhythm Plus V2</div>
-                    <div style="width: 52px;"></div>
+                    <span class="screenshot-label">Desktop App mit Custom Titlebar</span>
                 </div>
-                <div class="window-body">
-                    <img src="data/rythmplus-logo.png" alt="Rhythm+ Logo" class="logo-preview">
-                    <p>Custom Titlebar &middot; Discord RPC &middot; Full Desktop Integration</p>
+                <div class="screenshot-item">
+                    <div class="screenshot-frame small">
+                        <img src="data/rhythm-plus-v2-discord-rpcexample.png" alt="Discord Rich Presence">
+                    </div>
+                    <span class="screenshot-label">Discord Rich Presence</span>
                 </div>
             </div>
         </div>
