@@ -478,6 +478,13 @@ app.whenReady().then(() => {
 });
 
 app.on('window-all-closed', () => {
-  discord.destroy();
   if (process.platform !== 'darwin') app.quit();
+});
+
+let isQuitting = false;
+app.on('before-quit', (e) => {
+  if (isQuitting) return;
+  e.preventDefault();
+  isQuitting = true;
+  discord.destroy().finally(() => app.quit());
 });

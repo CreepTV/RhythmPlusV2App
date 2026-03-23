@@ -18,9 +18,11 @@ let pendingDetails = 'Rhythm+';
 let pendingSongId = null;
 let reconnecting = false;
 let onJoinCallback = null;
+let destroyed = false;
+let reconnectTimer = null;
 
 function connect() {
-  if (!DiscordRPC || !CLIENT_ID || reconnecting) return;
+  if (!DiscordRPC || !CLIENT_ID || reconnecting || destroyed) return;
 
   reconnecting = true;
   client = new DiscordRPC.Client({ transport: 'ipc' });
@@ -40,13 +42,17 @@ function connect() {
   client.on('disconnected', () => {
     client = null;
     reconnecting = false;
-    setTimeout(connect, 10000);
+    if (!destroyed) {
+      reconnectTimer = setTimeout(connect, 10000);
+    }
   });
 
   client.login({ clientId: CLIENT_ID }).catch(() => {
     client = null;
     reconnecting = false;
-    setTimeout(connect, 15000);
+    if (!destroyed) {
+      reconnectTimer = setTimeout(connect, 15000);
+    }
   });
 }
 
@@ -84,10 +90,18 @@ function setJoinCallback(cb) {
   onJoinCallback = cb;
 }
 
-function destroy() {
+async function destroy() {
+  destroyed = true;
+  if (reconnectTimer) {
+    clearTimeout(reconnectTimer);
+    reconnectTimer = null;
+  }
   if (client) {
-    client.destroy().catch(() => {});
+    const c = client;
     client = null;
+    try { await c.request('SET_ACTIVITY', { pid: process.pid }); } catch (e) {}
+    await new Promise(resolve => setTimeout(resolve, 500));
+    try { await c.destroy(); } catch (e) {}
   }
 }
 
