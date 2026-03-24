@@ -466,8 +466,8 @@ function showDisclaimer() {
 
 function setupAutoUpdater() {
   if (!app.isPackaged) {
-    console.log('[Updater] Dev-Modus – Auto-Update deaktiviert');
-    return;
+    // Dev-Modus: forceDevUpdateConfig aktivieren damit GitHub-Check trotzdem klappt
+    autoUpdater.forceDevUpdateConfig = true;
   }
 
   autoUpdater.autoDownload = false;
@@ -528,9 +528,11 @@ function showUpdateWindow() {
   updateWindow.loadFile(path.join(__dirname, 'update.html'));
 
   updateWindow.webContents.once('did-finish-load', () => {
-    if (pendingUpdateInfo) {
-      updateWindow.webContents.send('update-info', pendingUpdateInfo);
-    }
+    setTimeout(() => {
+      if (pendingUpdateInfo && updateWindow) {
+        updateWindow.webContents.send('update-info', pendingUpdateInfo);
+      }
+    }, 150);
   });
 
   updateWindow.on('closed', () => { updateWindow = null; });
@@ -617,6 +619,20 @@ function buildMenu() {
           label: 'About / Credits',
           accelerator: 'CmdOrCtrl+Shift+O',
           click: () => showDisclaimer(),
+        },
+        {
+          label: 'Nach Updates suchen',
+          accelerator: 'CmdOrCtrl+Shift+Alt+U',
+          click: () => {
+            autoUpdater.checkForUpdates().then((result) => {
+              if (!result || !result.updateInfo) return;
+              const latest = result.updateInfo.version;
+              const current = app.getVersion();
+              if (latest === current) {
+                console.log('[Updater] Kein Update — bereits aktuell:', current);
+              }
+            }).catch((err) => console.error('[Updater] Check-Fehler:', err.message));
+          },
         },
         {
           label: 'Quit',
