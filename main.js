@@ -14,6 +14,9 @@ let updateWindow;
 let pendingUpdateInfo = null;
 let titlebarView;
 let contentView;
+
+// Tracks game preview windows: titlebarWebContentsId → { win, gameContentView, gameTitlebarView }
+const gameWindows = new Map();
 let currentSongId = null;
 let currentSongTitle = null;
 let currentUsername = null;
@@ -279,6 +282,89 @@ function layoutViews() {
   }
 }
 
+function createGamePreviewWindow(url) {
+  const win = new BrowserWindow({
+    width: 1280,
+    height: 800,
+    minWidth: 800,
+    minHeight: 600,
+    icon: path.join(__dirname, 'data', 'rythmplus-icon.png'),
+    frame: false,
+    backgroundColor: '#0d0d0d',
+    show: false,
+  });
+
+  const gameTitlebarView = new WebContentsView({
+    webPreferences: {
+      preload: path.join(__dirname, 'titlebar-preload.js'),
+      contextIsolation: true,
+      nodeIntegration: false,
+    },
+  });
+  win.contentView.addChildView(gameTitlebarView);
+  gameTitlebarView.webContents.loadFile(path.join(__dirname, 'titlebar.html'));
+
+  const gameContentView = new WebContentsView({
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
+      contextIsolation: true,
+      nodeIntegration: false,
+      autoplayPolicy: 'no-user-gesture-required',
+    },
+  });
+  win.contentView.addChildView(gameContentView);
+  gameContentView.webContents.loadURL(url);
+
+  // Nur /game/* erlauben – bei anderer Navigation Fenster schließen
+  function checkAndCloseIfNotGame(navUrl) {
+    try {
+      const { pathname } = new URL(navUrl);
+      if (!pathname.startsWith('/game') && !pathname.startsWith('/result')) {
+        win.close();
+      }
+    } catch (e) {}
+  }
+
+  gameContentView.webContents.on('will-navigate', (event, navUrl) => {
+    try {
+      const { pathname } = new URL(navUrl);
+      if (!pathname.startsWith('/game') && !pathname.startsWith('/result')) {
+        event.preventDefault();
+        win.close();
+      }
+    } catch (e) {}
+  });
+  gameContentView.webContents.on('did-navigate', (_, navUrl) => checkAndCloseIfNotGame(navUrl));
+  gameContentView.webContents.on('did-navigate-in-page', (_, navUrl) => checkAndCloseIfNotGame(navUrl));
+  gameContentView.webContents.setWindowOpenHandler(() => ({ action: 'deny' }));
+
+  const titlebarId = gameTitlebarView.webContents.id;
+  gameWindows.set(titlebarId, { win, gameContentView, gameTitlebarView });
+
+  function layoutGameWindow() {
+    if (!win) return;
+    const [width, height] = win.getContentSize();
+    if (win.isFullScreen()) {
+      gameTitlebarView.setBounds({ x: 0, y: 0, width: 0, height: 0 });
+      gameContentView.setBounds({ x: 0, y: 0, width, height });
+    } else {
+      gameTitlebarView.setBounds({ x: 0, y: 0, width, height: TITLEBAR_HEIGHT });
+      gameContentView.setBounds({ x: 0, y: TITLEBAR_HEIGHT, width, height: height - TITLEBAR_HEIGHT });
+    }
+  }
+  layoutGameWindow();
+
+  win.on('resize', layoutGameWindow);
+  win.on('enter-full-screen', layoutGameWindow);
+  win.on('leave-full-screen', layoutGameWindow);
+  win.on('maximize', () => gameTitlebarView.webContents.send('maximize-change', true));
+  win.on('unmaximize', () => gameTitlebarView.webContents.send('maximize-change', false));
+
+  gameTitlebarView.webContents.once('did-finish-load', () => win.show());
+
+  win.on('closed', () => gameWindows.delete(titlebarId));
+}
+
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1280,
@@ -353,6 +439,14 @@ function createWindow() {
         },
       };
     }
+    // Wenn man im Editor ist und ein /game/-Link geöffnet wird → neues Fenster mit custom Titlebar
+    const currentURL = contentView.webContents.getURL();
+    const isOnEditor = currentURL.includes('/editor');
+    const isGameLink = new URL(url).pathname.startsWith('/game');
+    if (isOnEditor && isGameLink) {
+      createGamePreviewWindow(url);
+      return { action: 'deny' };
+    }
     // Alles andere → in der App laden, kein Popup
     contentView.webContents.loadURL(url);
     return { action: 'deny' };
@@ -386,8 +480,13 @@ ipcMain.on('update-open-url', (_, url) => {
   shell.openExternal(url);
 });
 
-ipcMain.on('navigate-home', () => {
-  if (contentView) contentView.webContents.loadURL(TARGET_URL);
+ipcMain.on('navigate-home', (event) => {
+  const gameEntry = [...gameWindows.values()].find(e => e.gameTitlebarView.webContents.id === event.sender.id);
+  if (gameEntry) {
+    gameEntry.gameContentView.webContents.loadURL(TARGET_URL);
+  } else if (contentView) {
+    contentView.webContents.loadURL(TARGET_URL);
+  }
 });
 
 ipcMain.on('close-disclaimer', () => {
@@ -421,13 +520,16 @@ ipcMain.on('navigate-to-song', () => {
 });
 
 ipcMain.on('window-control', (event, action) => {
-  if (!mainWindow) return;
+  // Find the correct window: game preview or main
+  const gameEntry = [...gameWindows.values()].find(e => e.gameTitlebarView.webContents.id === event.sender.id);
+  const win = gameEntry ? gameEntry.win : mainWindow;
+  if (!win) return;
   switch (action) {
-    case 'minimize': mainWindow.minimize(); break;
+    case 'minimize': win.minimize(); break;
     case 'maximize':
-      mainWindow.isMaximized() ? mainWindow.unmaximize() : mainWindow.maximize();
+      win.isMaximized() ? win.unmaximize() : win.maximize();
       break;
-    case 'close': mainWindow.close(); break;
+    case 'close': win.close(); break;
   }
 });
 
