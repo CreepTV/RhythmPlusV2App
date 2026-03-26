@@ -1,11 +1,50 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rhythm Plus V2 — Desktop App</title>
-    <meta name="description" content="Rhythm Plus V2 Desktop App — Spiele das Rhythm+ Music Game als native Desktop-App mit Discord Rich Presence und mehr.">
-    <link rel="icon" type="image/png" href="data/rythmplus-icon.png">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Rhythm Plus V2 Desktop App – Das Rhythm+ Music Game für Windows, Linux & macOS</title>
+        <meta name="description" content="Rhythm Plus V2 Desktop App – Spiele das beliebte Rhythm+ Music Game als native Desktop-App für Windows, Linux und macOS. Mit Discord Rich Presence, Custom Titlebar, Google Login und mehr. Open Source & kostenlos.">
+        <meta name="keywords" content="Rhythm Plus, Rhythm+, Music Game, Desktop App, Windows, Linux, macOS, Discord Rich Presence, Open Source, Download, Fan Projekt, Musikspiel, Google Login, Electron">
+        <meta name="author" content="CreepTV">
+        <link rel="icon" type="image/png" href="data/rythmplus-icon.png">
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://github.com/CreepTV/RythmPlusV2App">
+        <meta property="og:title" content="Rhythm Plus V2 Desktop App – Das Rhythm+ Music Game für Windows, Linux & macOS">
+        <meta property="og:description" content="Spiele das beliebte Rhythm+ Music Game als native Desktop-App für Windows, Linux und macOS. Mit Discord Rich Presence, Custom Titlebar, Google Login und mehr. Open Source & kostenlos.">
+        <meta property="og:image" content="https://raw.githubusercontent.com/CreepTV/RythmPlusV2App/main/data/rythmplus-icon.png">
+        <!-- Twitter -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:url" content="https://github.com/CreepTV/RythmPlusV2App">
+        <meta name="twitter:title" content="Rhythm Plus V2 Desktop App – Das Rhythm+ Music Game für Windows, Linux & macOS">
+        <meta name="twitter:description" content="Spiele das beliebte Rhythm+ Music Game als native Desktop-App für Windows, Linux und macOS. Mit Discord Rich Presence, Custom Titlebar, Google Login und mehr. Open Source & kostenlos.">
+        <meta name="twitter:image" content="https://raw.githubusercontent.com/CreepTV/RythmPlusV2App/main/data/rythmplus-icon.png">
+        <!-- Canonical -->
+        <link rel="canonical" href="https://github.com/CreepTV/RythmPlusV2App">
+        <!-- Structured Data -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "Rhythm Plus V2 Desktop App",
+            "operatingSystem": "Windows, Linux, macOS",
+            "applicationCategory": "GameApplication",
+            "description": "Spiele das beliebte Rhythm+ Music Game als native Desktop-App für Windows, Linux und macOS. Mit Discord Rich Presence, Custom Titlebar, Google Login und mehr. Open Source & kostenlos.",
+            "image": "https://raw.githubusercontent.com/CreepTV/RythmPlusV2App/main/data/rythmplus-icon.png",
+            "author": {
+                "@type": "Person",
+                "name": "CreepTV"
+            },
+            "url": "https://github.com/CreepTV/RythmPlusV2App",
+            "license": "https://opensource.org/licenses/MIT",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "EUR"
+            }
+        }
+        </script>
     <style>
         /* ========== Reset & Base ========== */
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -550,190 +589,194 @@
     <div class="bg-glow"></div>
 
     <!-- Navbar -->
-    <nav>
-        <a href="#" class="nav-logo">
-            <img src="data/rythmplus-icon.png" alt="Rhythm+">
-            <span>Rhythm+ V2 WebApp</span>
+    <nav itemscope itemtype="https://schema.org/SiteNavigationElement">
+        <a href="#" class="nav-logo" itemprop="url">
+            <img src="data/rythmplus-icon.png" alt="Rhythm Plus V2 Logo" itemprop="image">
+            <span itemprop="name">Rhythm+ V2 Desktop App</span>
         </a>
         <ul class="nav-links">
-            <li><a href="#features">Features</a></li>
-            <li><a href="#credits">Credits</a></li>
-            <li><a href="#download">Download</a></li>
-            <li><a href="https://github.com/CreepTV/RythmPlusV2App" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a href="#features" itemprop="url">Features</a></li>
+            <li><a href="#credits" itemprop="url">Credits</a></li>
+            <li><a href="#download" itemprop="url">Download</a></li>
+            <li><a href="https://github.com/CreepTV/RythmPlusV2App" target="_blank" rel="noopener" itemprop="url">GitHub</a></li>
         </ul>
     </nav>
 
     <!-- Hero -->
-    <section class="hero">
-        <img src="data/rythmplus-icon.png" alt="Rhythm Plus V2" class="hero-icon">
+    <header>
+      <section class="hero" itemscope itemtype="https://schema.org/SoftwareApplication">
+          <img src="data/rythmplus-icon.png" alt="Rhythm Plus V2 Desktop App Logo" class="hero-icon" itemprop="image">
 
-        <div class="fan-badge">
-            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-            Inoffizielles Fan-Projekt
-        </div>
+          <div class="fan-badge">
+              <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              Inoffizielles Fan-Projekt
+          </div>
 
-        <h1>Rhythm Plus V2 App</h1>
-        <p class="subtitle">Das Rhythm+ Music Game als native Desktop-App &mdash; mit Discord Rich Presence, Custom Titlebar und mehr.</p>
-        <p class="version">Version 1.1.5 &middot; MIT License &middot; Open Source</p>
+          <h1 itemprop="name">Rhythm Plus V2 Desktop App</h1>
+          <p class="subtitle" itemprop="description">Das Rhythm+ Music Game als native Desktop-App &mdash; mit Discord Rich Presence, Custom Titlebar und mehr.</p>
+          <p class="version">Version 1.1.5 &middot; MIT License &middot; Open Source</p>
 
-        <div class="hero-buttons">
-            <a href="https://github.com/CreepTV/RythmPlusV2App/releases/latest" class="btn btn-primary" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                Download
-            </a>
-            <a href="https://github.com/CreepTV/RythmPlusV2App" class="btn btn-secondary" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                GitHub
-            </a>
-        </div>
+          <div class="hero-buttons">
+              <a href="https://github.com/CreepTV/RythmPlusV2App/releases/latest" class="btn btn-primary" target="_blank" rel="noopener" itemprop="downloadUrl">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  Download
+              </a>
+              <a href="https://github.com/CreepTV/RythmPlusV2App" class="btn btn-secondary" target="_blank" rel="noopener" itemprop="url">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                  GitHub
+              </a>
+          </div>
 
-        <div class="scroll-hint">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-    </section>
+          <div class="scroll-hint">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+      </section>
+    </header>
 -*
     <!-- Features -->
-    <section id="features" class="fade-in">
-        <h2 class="section-title">Features</h2>
-        <p class="section-desc">Alles was du brauchst, um Rhythm+ als vollwertige Desktop-App zu erleben.</p>
+    <main>
+      <section id="features" class="fade-in">
+          <h2 class="section-title">Features</h2>
+          <p class="section-desc">Alles was du brauchst, um Rhythm+ als vollwertige Desktop-App zu erleben.</p>
 
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon discord">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03z"/></svg>
-                </div>
-                <h3>Discord Rich Presence</h3>
-                <p>Zeige deinen Freunden auf Discord was du gerade spielst. Mit Song-Titel, direktem Link und &ldquo;Ask to Join&rdquo; Feature.</p>
-            </div>
+          <div class="features-grid">
+              <article class="feature-card" itemscope itemtype="https://schema.org/Offer">
+                  <div class="feature-icon discord">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03z"/></svg>
+                  </div>
+                  <h3>Discord Rich Presence</h3>
+                  <p>Zeige deinen Freunden auf Discord was du gerade spielst. Mit Song-Titel, direktem Link und &ldquo;Ask to Join&rdquo; Feature.</p>
+              </article>
 
-            <div class="feature-card">
-                <div class="feature-icon titlebar">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="2"/><line x1="2" y1="7" x2="22" y2="7"/></svg>
-                </div>
-                <h3>Custom Titlebar</h3>
-                <p>Elegante Titelleiste im Dark Theme mit Song-Anzeige, Profil-Avatar und nahtloser Integration ins Spielerlebnis.</p>
-            </div>
+              <article class="feature-card">
+                  <div class="feature-icon titlebar">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="2"/><line x1="2" y1="7" x2="22" y2="7"/></svg>
+                  </div>
+                  <h3>Custom Titlebar</h3>
+                  <p>Elegante Titelleiste im Dark Theme mit Song-Anzeige, Profil-Avatar und nahtloser Integration ins Spielerlebnis.</p>
+              </article>
 
-            <div class="feature-card">
-                <div class="feature-icon keyboard">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="6" y1="8" x2="6.01" y2="8"/><line x1="10" y1="8" x2="10.01" y2="8"/><line x1="14" y1="8" x2="14.01" y2="8"/><line x1="18" y1="8" x2="18.01" y2="8"/><line x1="8" y1="12" x2="8.01" y2="12"/><line x1="12" y1="12" x2="12.01" y2="12"/><line x1="16" y1="12" x2="16.01" y2="12"/><line x1="7" y1="16" x2="17" y2="16"/></svg>
-                </div>
-                <h3>Keyboard Shortcuts</h3>
-                <p>Volle Kontrolle per Tastatur: Navigation, Zoom, Fullscreen (F11), DevTools &mdash; alles einen Shortcut entfernt.</p>
-            </div>
+              <article class="feature-card">
+                  <div class="feature-icon keyboard">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="6" y1="8" x2="6.01" y2="8"/><line x1="10" y1="8" x2="10.01" y2="8"/><line x1="14" y1="8" x2="14.01" y2="8"/><line x1="18" y1="8" x2="18.01" y2="8"/><line x1="8" y1="12" x2="8.01" y2="12"/><line x1="12" y1="12" x2="12.01" y2="12"/><line x1="16" y1="12" x2="16.01" y2="12"/><line x1="7" y1="16" x2="17" y2="16"/></svg>
+                  </div>
+                  <h3>Keyboard Shortcuts</h3>
+                  <p>Volle Kontrolle per Tastatur: Navigation, Zoom, Fullscreen (F11), DevTools &mdash; alles einen Shortcut entfernt.</p>
+              </article>
 
-            <div class="feature-card">
-                <div class="feature-icon auth">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                </div>
-                <h3>Google OAuth Login</h3>
-                <p>Nahtloser Google-Login direkt in der App. Keine Umwege &mdash; melde dich an wie im Browser.</p>
-            </div>
+              <article class="feature-card">
+                  <div class="feature-icon auth">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  </div>
+                  <h3>Google OAuth Login</h3>
+                  <p>Nahtloser Google-Login direkt in der App. Keine Umwege &mdash; melde dich an wie im Browser.</p>
+              </article>
 
-            <div class="feature-card">
-                <div class="feature-icon platform">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-                </div>
-                <h3>Cross-Platform</h3>
-                <p>Verfügbar für Windows (Installer), Linux (AppImage) und macOS (DMG). Überall das gleiche Erlebnis.</p>
-            </div>
+              <article class="feature-card">
+                  <div class="feature-icon platform">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  </div>
+                  <h3>Cross-Platform</h3>
+                  <p>Verfügbar für Windows (Installer), Linux (AppImage) und macOS (DMG). Überall das gleiche Erlebnis.</p>
+              </article>
 
-            <div class="feature-card">
-                <div class="feature-icon opensource">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
-                </div>
-                <h3>Open Source</h3>
-                <p>Vollständig quelloffen unter MIT-Lizenz. Schau dir den Code an, trage bei oder forke das Projekt.</p>
-            </div>
-        </div>
-    </section>
+              <article class="feature-card">
+                  <div class="feature-icon opensource">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+                  </div>
+                  <h3>Open Source</h3>
+                  <p>Vollständig quelloffen unter MIT-Lizenz. Schau dir den Code an, trage bei oder forke das Projekt.</p>
+              </article>
+          </div>
+      </section>
 
     <!-- Preview -->
-    <section class="preview-section fade-in">
-        <h2 class="section-title">Desktop Experience</h2>
-        <p class="section-desc">Das volle Rhythm+ Erlebnis &mdash; nativ auf deinem Desktop.</p>
+      <section class="preview-section fade-in">
+          <h2 class="section-title">Desktop Experience</h2>
+          <p class="section-desc">Das volle Rhythm+ Erlebnis &mdash; nativ auf deinem Desktop.</p>
 
-        <div class="screenshots">
-            <div class="screenshots-row">
-                <div class="screenshot-item">
-                    <div class="screenshot-frame">
-                        <img src="data/rhythm-plus-v2-Appexample.png" alt="Rhythm Plus V2 Desktop App">
-                    </div>
-                    <span class="screenshot-label">Desktop App mit Custom Titlebar</span>
-                </div>
-                <div class="screenshot-item">
-                    <div class="screenshot-frame small">
-                        <img src="data/rhythm-plus-v2-discord-rpcexample.png" alt="Discord Rich Presence">
-                    </div>
-                    <span class="screenshot-label">Discord Rich Presence</span>
-                </div>
-            </div>
-        </div>
-    </section>
+          <div class="screenshots">
+              <div class="screenshots-row">
+                  <figure class="screenshot-item">
+                      <div class="screenshot-frame">
+                          <img src="data/rhythm-plus-v2-Appexample.png" alt="Rhythm Plus V2 Desktop App Screenshot" loading="lazy">
+                      </div>
+                      <figcaption class="screenshot-label">Desktop App mit Custom Titlebar</figcaption>
+                  </figure>
+                  <figure class="screenshot-item">
+                      <div class="screenshot-frame small">
+                          <img src="data/rhythm-plus-v2-discord-rpcexample.png" alt="Discord Rich Presence Screenshot" loading="lazy">
+                      </div>
+                      <figcaption class="screenshot-label">Discord Rich Presence</figcaption>
+                  </figure>
+              </div>
+          </div>
+      </section>
 
     <!-- Credits -->
-    <section id="credits" class="credits fade-in">
-        <h2 class="section-title">Credits & Originalwerk</h2>
-        <p class="section-desc">Diese App basiert auf dem grossartigen Rhythm+ Music Game.</p>
+      <section id="credits" class="credits fade-in">
+          <h2 class="section-title">Credits &amp; Originalwerk</h2>
+          <p class="section-desc">Diese App basiert auf dem großartigen Rhythm+ Music Game.</p>
 
-        <div class="credits-box">
-            <h3>Rhythm+ Music Game</h3>
-            <p>
-                <strong>Rhythm Plus</strong> ist ein browserbasiertes Rhythmus-Spiel, entwickelt von
-                <a href="https://github.com/henryzt" target="_blank" rel="noopener" style="color: var(--purple);">henryzt</a>.
-                Diese Desktop-App ist ein <strong>inoffizielles Fan-Projekt</strong> und steht in keiner
-                offiziellen Verbindung zum Originalwerk. Alle Rechte am Originalspiel liegen beim
-                jeweiligen Urheber.
-            </p>
+          <div class="credits-box">
+              <h3>Rhythm+ Music Game</h3>
+              <p>
+                  <strong>Rhythm Plus</strong> ist ein browserbasiertes Rhythmus-Spiel, entwickelt von
+                  <a href="https://github.com/henryzt" target="_blank" rel="noopener" style="color: var(--purple);">henryzt</a>.
+                  Diese Desktop-App ist ein <strong>inoffizielles Fan-Projekt</strong> und steht in keiner
+                  offiziellen Verbindung zum Originalwerk. Alle Rechte am Originalspiel liegen beim
+                  jeweiligen Urheber.
+              </p>
 
-            <div class="credits-links">
-                <a href="https://rhythm-plus.com/" class="credits-link" target="_blank" rel="noopener">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-                    rhythm-plus.com
-                </a>
-                <a href="https://v2.rhythm-plus.com/" class="credits-link" target="_blank" rel="noopener">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-                    v2.rhythm-plus.com
-                </a>
-                <a href="https://github.com/henryzt/Rhythm-Plus-Music-Game" class="credits-link" target="_blank" rel="noopener">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                    Original GitHub Repo
-                </a>
-                <a href="https://github.com/CreepTV/RythmPlusV2App" class="credits-link" target="_blank" rel="noopener">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                    Desktop App Repo
-                </a>
-            </div>
-        </div>
-    </section>
+              <nav class="credits-links" aria-label="Externe Links">
+                  <a href="https://rhythm-plus.com/" class="credits-link" target="_blank" rel="noopener">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+                      rhythm-plus.com
+                  </a>
+                  <a href="https://v2.rhythm-plus.com/" class="credits-link" target="_blank" rel="noopener">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+                      v2.rhythm-plus.com
+                  </a>
+                  <a href="https://github.com/henryzt/Rhythm-Plus-Music-Game" class="credits-link" target="_blank" rel="noopener">
+                      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                      Original GitHub Repo
+                  </a>
+                  <a href="https://github.com/CreepTV/RythmPlusV2App" class="credits-link" target="_blank" rel="noopener">
+                      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                      Desktop App Repo
+                  </a>
+              </nav>
+          </div>
+      </section>
 
     <!-- Download -->
-    <section id="download" class="download fade-in">
-        <div class="download-box">
-            <h2 class="section-title">Jetzt herunterladen</h2>
-            <p>Lade die neueste Version der Rhythm Plus V2 Desktop App kostenlos herunter.</p>
+      <section id="download" class="download fade-in">
+          <div class="download-box">
+              <h2 class="section-title">Jetzt herunterladen</h2>
+              <p>Lade die neueste Version der Rhythm Plus V2 Desktop App kostenlos herunter.</p>
 
-            <a href="https://github.com/CreepTV/RythmPlusV2App/releases/latest" class="btn btn-primary" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                Download von GitHub Releases
-            </a>
+              <a href="https://github.com/CreepTV/RythmPlusV2App/releases/latest" class="btn btn-primary" target="_blank" rel="noopener">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  Download von GitHub Releases
+              </a>
 
-            <div class="download-platforms">
-                <span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
-                    Windows
-                </span>
-                <span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12.504 0c-.155 0-.311.001-.465.003-.653.014-1.283.074-1.886.181C7.13.89 5.15 2.675 3.83 5.227c-1.32 2.55-1.826 5.776-1.826 8.773 0 2.997.506 6.223 1.826 8.773 1.32 2.552 3.3 4.337 6.323 5.043.603.107 1.233.167 1.886.181.154.002.31.003.465.003s.311-.001.465-.003c.653-.014 1.283-.074 1.886-.181 3.023-.706 5.003-2.491 6.323-5.043 1.32-2.55 1.826-5.776 1.826-8.773 0-2.997-.506-6.223-1.826-8.773C19.858 2.675 17.878.89 14.855.184 14.252.077 13.622.017 12.969.003 12.815.001 12.659 0 12.504 0z"/></svg>
-                    Linux
-                </span>
-                <span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-                    macOS
-                </span>
-            </div>
-        </div>
-    </section>
+              <div class="download-platforms">
+                  <span>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+                      Windows
+                  </span>
+                  <span>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12.504 0c-.155 0-.311.001-.465.003-.653.014-1.283.074-1.886.181C7.13.89 5.15 2.675 3.83 5.227c-1.32 2.55-1.826 5.776-1.826 8.773 0 2.997.506 6.223 1.826 8.773 1.32 2.552 3.3 4.337 6.323 5.043.603.107 1.233.167 1.886.181.154.002.31.003.465.003s.311-.001.465-.003c.653-.014 1.283-.074 1.886-.181 3.023-.706 5.003-2.491 6.323-5.043 1.32-2.55 1.826-5.776 1.826-8.773 0-2.997-.506-6.223-1.826-8.773C19.858 2.675 17.878.89 14.855.184 14.252.077 13.622.017 12.969.003 12.815.001 12.659 0 12.504 0z"/></svg>
+                      Linux
+                  </span>
+                  <span>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                      macOS
+                  </span>
+              </div>
+          </div>
+      </section>
+    </main>
 
     <!-- Footer -->
     <footer>
