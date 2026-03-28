@@ -5,7 +5,11 @@ const path = require('path');
 const fs = require('fs');
 const discord = require('./discord');
 
-const TARGET_URL = 'https://v2.rhythm-plus.com/';
+function getTargetUrl() {
+  const settings = appSettings || { version: 'v2' };
+  if (settings.version === 'v1') return 'https://rhythm-plus.com/';
+  return 'https://v2.rhythm-plus.com/';
+}
 const TITLEBAR_HEIGHT = 40;
 
 // Clear corrupted Chromium cache/quota databases before app starts
@@ -29,8 +33,14 @@ let contentView;
 // ── Settings ──────────────────────────────────────────────────────────────────
 const SETTINGS_PATH = path.join(app.getPath('userData'), 'settings.json');
 
+
 function loadSettings() {
-  try { return JSON.parse(fs.readFileSync(SETTINGS_PATH, 'utf-8')); } catch { return { compactHud: false }; }
+  try {
+    const s = JSON.parse(fs.readFileSync(SETTINGS_PATH, 'utf-8'));
+    return { compactHud: false, version: 'v2', ...s };
+  } catch {
+    return { compactHud: false, version: 'v2' };
+  }
 }
 
 function saveSettings(settings) {
@@ -39,7 +49,7 @@ function saveSettings(settings) {
   }
 }
 
-let appSettings = { compactHud: false };
+let appSettings = { compactHud: false, version: 'v2' };
 
 // CSS injected when Compact HUD is enabled
 const COMPACT_HUD_CSS = `
@@ -433,6 +443,33 @@ function createGamePreviewWindow(url) {
 
   gameTitlebarView.webContents.once('did-finish-load', () => win.show());
 
+  win.on('close', async (event) => {
+    // Stoppe alle Audio/Video-Ausgaben im Preview-Fenster, dann schließe wirklich
+    event.preventDefault();
+    try {
+      await gameContentView.webContents.executeJavaScript(`
+        (function() {
+          // Pausiere alle Audio- und Video-Elemente
+          document.querySelectorAll('audio,video').forEach(el => { el.pause && el.pause(); el.currentTime = 0; });
+          // Stoppe alle laufenden WebAudio-Kontexte
+          if (window.AudioContext || window.webkitAudioContext) {
+            const ctxs = [];
+            if (window._audioCtx) ctxs.push(window._audioCtx);
+            if (window._audioContext) ctxs.push(window._audioContext);
+            if (window.AudioContext) {
+              for (const k in window) {
+                if (window[k] instanceof window.AudioContext) ctxs.push(window[k]);
+              }
+            }
+            ctxs.forEach(ctx => { try { ctx.close && ctx.close(); } catch(e){} });
+          }
+        })();
+      `);
+    } catch(e) {}
+    // Jetzt wirklich schließen (Listener vorher entfernen, um Endlosschleife zu vermeiden)
+    win.removeAllListeners('close');
+    win.close();
+  });
   win.on('closed', () => gameWindows.delete(titlebarId));
 }
 
@@ -471,7 +508,7 @@ function createWindow() {
     },
   });
   mainWindow.contentView.addChildView(contentView);
-  contentView.webContents.loadURL(TARGET_URL);
+  contentView.webContents.loadURL(getTargetUrl());
   startTitlePolling();
 
   contentView.webContents.on('did-navigate', (_, url) => handleNavigation(url));
@@ -550,9 +587,6 @@ ipcMain.on('open-update-window', () => showUpdateWindow());
 ipcMain.on('update-download', () => {
   autoUpdater.downloadUpdate().catch((err) => {
     console.error('[Updater] Download-Fehler:', err.message);
-    if (updateWindow) {
-      updateWindow.webContents.send('update-error', err.message);
-    }
   });
 });
 
@@ -571,9 +605,9 @@ ipcMain.on('update-open-url', (_, url) => {
 ipcMain.on('navigate-home', (event) => {
   const gameEntry = [...gameWindows.values()].find(e => e.gameTitlebarView.webContents.id === event.sender.id);
   if (gameEntry) {
-    gameEntry.gameContentView.webContents.loadURL(TARGET_URL);
+    gameEntry.gameContentView.webContents.loadURL(getTargetUrl());
   } else if (contentView) {
-    contentView.webContents.loadURL(TARGET_URL);
+    contentView.webContents.loadURL(getTargetUrl());
   }
 });
 
@@ -681,9 +715,14 @@ ipcMain.on('close-settings', () => {
 ipcMain.handle('get-settings', () => loadSettings());
 
 ipcMain.on('set-settings', (_, settings) => {
+  // Version-Setting korrekt übernehmen
   appSettings = { ...appSettings, ...settings };
   saveSettings(appSettings);
   applyCompactHud(appSettings.compactHud);
+  // Wenn Version geändert wurde, Seite neu laden
+  if (typeof settings.version !== 'undefined') {
+    if (contentView) contentView.webContents.loadURL(getTargetUrl());
+  }
 });
 
 function isFirstLaunch() {
@@ -804,7 +843,7 @@ function buildMenu() {
         {
           label: 'Home',
           accelerator: 'CmdOrCtrl+H',
-          click: () => contentView?.webContents.loadURL(TARGET_URL),
+          click: () => contentView?.webContents.loadURL(getTargetUrl()),
         },
         {
           label: 'Reload',
@@ -914,6 +953,7 @@ app.whenReady().then(() => {
   // When another user joins via "Ask to Join" → navigate to that song
   discord.setJoinCallback((songId) => {
     if (contentView) {
+      // Immer v2 für Join, da Song-IDs nur dort funktionieren
       contentView.webContents.loadURL(`https://v2.rhythm-plus.com/?songId=${songId}`);
     }
   });

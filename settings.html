@@ -177,17 +177,34 @@
         <span class="slider"></span>
       </label>
     </div>
+
+    <div class="setting-row">
+      <div class="setting-info">
+        <div class="setting-label">Version</div>
+        <div class="setting-desc">Wähle zwischen Rhythm Plus v2 und v1 (classic)</div>
+      </div>
+      <select id="select-version" style="background:#232323;color:#fff;border-radius:6px;padding:4px 10px;border:1px solid #444;outline:none;">
+        <option value="v2">v2 (rhythm-plus.com/v2)</option>
+        <option value="v1">v1 (rhythm-plus.com)</option>
+      </select>
+    </div>
   </div>
 
   <script>
     const toggle = document.getElementById('toggle-compact-hud');
+    const selectVersion = document.getElementById('select-version');
 
     window.appSettings.getSettings().then(settings => {
       toggle.checked = !!settings.compactHud;
+      selectVersion.value = settings.version === 'v1' ? 'v1' : 'v2';
     });
 
     toggle.addEventListener('change', () => {
       window.appSettings.saveSettings({ compactHud: toggle.checked });
+    });
+
+    selectVersion.addEventListener('change', () => {
+      window.appSettings.saveSettings({ version: selectVersion.value });
     });
 
     document.getElementById('btn-close').addEventListener('click', () => {
