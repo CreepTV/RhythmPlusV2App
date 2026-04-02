@@ -12,14 +12,18 @@ function getTargetUrl() {
 }
 const TITLEBAR_HEIGHT = 40;
 
-// Clear corrupted Chromium cache/quota databases before app starts
-;[
-  path.join(app.getPath('userData'), 'Default', 'QuotaManager'),
-  path.join(app.getPath('userData'), 'GrShaderCache'),
-  path.join(app.getPath('userData'), 'ShaderCache'),
-].forEach(p => {
-  try { fs.rmSync(p, { recursive: true, force: true }); } catch (_) {}
-});
+// Optional emergency reset for Chromium caches.
+// Disabled by default because wiping these on every launch can cause
+// "Unable to create cache" and quota/service-worker DB errors.
+if (process.env.RHYTHMPLUS_CLEAR_CACHE_ON_START === '1') {
+  [
+    path.join(app.getPath('userData'), 'Default', 'QuotaManager'),
+    path.join(app.getPath('userData'), 'GrShaderCache'),
+    path.join(app.getPath('userData'), 'ShaderCache'),
+  ].forEach(p => {
+    try { fs.rmSync(p, { recursive: true, force: true }); } catch (_) {}
+  });
+}
 
 let mainWindow;
 let disclaimerWindow;
